@@ -11,15 +11,15 @@ export type UploadResult = {
   event: "success";
 };
 
-export default function Home() {
+export default function Test() {
   const [imageId, setImageId] = useState("");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <CldUploadButton
-        onUpload={(result: UploadResult) => {
-          setImageId(result.info.public_id);
-        }}
+        // onUpload={(result: UploadResult) => {
+        //   setImageId(result.info.public_id);
+        // }}
         uploadPreset="ttvpaqvc"
       />
 
