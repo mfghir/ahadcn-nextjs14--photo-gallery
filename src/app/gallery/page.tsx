@@ -1,28 +1,46 @@
-"use client"
-
-import { Button } from '@/components/ui/button'
-import { CldUploadButton } from 'next-cloudinary'
 import React from 'react'
+import UploadButton from './upload-button'
+import cloudinary from "cloudinary"
+import { CldImage } from 'next-cloudinary';
+import GalleryGrid from './gallery-grid';
 
-const GalleryPage = () => {
+
+
+export type SearchResult = {
+    public_id: string;
+    tags: string[];
+};
+
+
+const GalleryPage = async () => {
+    const results = (await cloudinary.v2.search
+        .expression('resource_type:image')
+        .sort_by('public_id', 'desc')
+        .max_results(5)
+        .execute()
+        .then()) as { resources: SearchResult[] };
+
     return (
         <section>
-            <div className="flex flex-col gap-8">
-                <div className="flex justify-between">
-                    <h1 className="text-4xl font-bold">Gallery</h1>
-
-                    <Button asChild>
-                        <div className="flex gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                            </svg>
-
-                            <CldUploadButton />
-                        </div>
-                    </Button>
-                </div>
-
+            {/* <div className="flex flex-col gap-8"> */}
+            <div className="flex justify-between">
+                <h1 className="text-4xl font-bold">Gallery</h1>
+                <UploadButton />
             </div>
+
+            <div className="grid grid-cols-4 gap-4">
+                {results.resources.map((result) => (
+                    <GalleryGrid
+                        key={result.public_id}
+                        width="500"
+                        height="300"
+                        src={result.public_id}
+                        alt="Description of my image"
+                    />
+                ))}
+            </div>
+
+            {/* </div> */}
         </section>
     )
 }
