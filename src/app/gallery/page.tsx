@@ -15,10 +15,9 @@ export type SearchResult = {
 const GalleryPage = async () => {
     const results = (await cloudinary.v2.search
         .expression('resource_type:image')
-        .sort_by('public_id', 'desc')
-        .max_results(5)
-        .execute()
-        .then()) as { resources: SearchResult[] };
+        .sort_by('created_at', 'desc')
+        .max_results(10)
+        .execute()) as { resources: SearchResult[] };
 
     return (
         <section>
