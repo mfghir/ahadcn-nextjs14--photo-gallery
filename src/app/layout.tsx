@@ -79,12 +79,13 @@ async function SideMenu() {
                 Albums
               </Link>
             </Button>
+            
             <Button
               asChild
               variant="ghost"
               className="w-full justify-start flex gap-2"
             >
-              <Link href="/albums">
+              <Link href="/favorites">
                 <Heart />
 
                 Favorite
