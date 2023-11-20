@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "./icons/menu";
 
-// import { AddToAlbumDialog } from "./add-to-album-dialog";
+import { AddToAlbumDialog } from "./add-to-album-dialog";
 import { SearchResult } from "@/app/gallery/page";
 import { useState } from "react";
 
@@ -25,11 +25,12 @@ export function ImageMenu({ image }: { image: SearchResult }) {
             <Menu />
           </Button>
         </DropdownMenuTrigger>
-        
+
         <DropdownMenuContent className="w-40">
           <DropdownMenuItem asChild>
-            {/* <AddToAlbumDialog image={image} onClose={() => setOpen(false)} /> */}
+            <AddToAlbumDialog image={image} onClose={() => setOpen(false)} />
           </DropdownMenuItem>
+          
           <DropdownMenuItem asChild>
             <Button
               className="cursor-pointer flex justify-start pl-4"

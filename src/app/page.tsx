@@ -1,4 +1,3 @@
-
 "use client";
 
 import { CldImage } from "next-cloudinary";
@@ -21,7 +20,7 @@ export default function Home() {
         onUpload={(result: UploadResult) => {
           setImageId(result.info.public_id);
         }}
-        uploadPreset="ttvpaqvc"
+        uploadPreset="izwoloai"
       />
 
       {imageId && (
